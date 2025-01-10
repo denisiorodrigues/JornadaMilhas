@@ -33,7 +33,8 @@ public class OfertaViagem: Valida
         if (!Periodo.EhValido)
         {
             Erros.RegistrarErro(Periodo.Erros.Sumario);
-        } else if (Rota == null || Periodo == null)
+        } 
+        else if (Rota == null || Periodo == null)
         {
             Erros.RegistrarErro("A oferta de viagem não possui rota ou período válidos.");
         } 

@@ -30,4 +30,18 @@ public class OfertaViagemTest
         Assert.Contains("A oferta de viagem não possui rota ou período válidos.", oferta.Erros.Sumario);
         Assert.False(oferta.EhValido);
     }
+    
+    [Fact]
+    public void TestandoOfertaComDataInicioMaiorQueFinal()
+    {
+        Rota rota = new Rota("OrigemTest", "DestinoTest");
+        Periodo periodo = new Periodo(new DateTime(2025, 01, 08), new DateTime(2024, 02, 02));
+        double preco = 100.00;
+        var validacao = true;
+        
+        OfertaViagem oferta = new OfertaViagem(rota, periodo, preco);
+        
+        Assert.Contains("Erro: Data de ida não pode ser maior que a data de volta.", oferta.Erros.Sumario);
+        Assert.False(oferta.EhValido);
+    }
 }
