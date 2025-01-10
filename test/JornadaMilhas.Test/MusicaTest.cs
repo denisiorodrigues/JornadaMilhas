@@ -4,26 +4,29 @@ namespace JornadaMilhas.Test;
 
 public class MusicaTest
 {
-    [Fact]
-    public void ValidarNomeDaMusica()
+    [Theory]
+    [InlineData("")]
+    [InlineData("Minha História")]
+    public void RetornaNomeDaMusica(string nome)
     {
         //Arrange
-        string nomeDaMusica = "JornadaMilhas.Test";
         
         //Act
-        var musica = new Musica(nomeDaMusica);
+        var musica = new Musica(nome);
         
         //Assert
         Assert.NotNull(musica);
-        Assert.Equal(nomeDaMusica, musica.Nome);
+        Assert.Equal(nome, musica.Nome);
     }
     
-    [Fact]
-    public void ValidaroIndetificaroDaMusicaFoiinicializado()
+    [Theory]
+    [InlineData(1)]
+    [InlineData(2)]
+    [InlineData(0)]
+    public void ValidaroSeOIndetificadorDaMusicaFoiInicializado(int id)
     {
         //Arrange
         string nomeDaMusica = "JornadaMilhas.Test";
-        int id = 1;
 
         //Act
         var musica = new Musica(nomeDaMusica) { Id = id };
@@ -33,14 +36,14 @@ public class MusicaTest
         Assert.Equal(id, musica.Id);
     } 
     
-    [Fact]
-    public void ValidaroRetornoToStringDeUmObjetoMusica()
+    [Theory]
+    [InlineData(1, "nome da musica")]
+    [InlineData(2, "")]
+    public void RetornarToStringDoObjetoEValidandoORsultadoEsperado(int id, string nome)
     {
         //Arrange
-        string nomeDaMusica = "JornadaMilhas.Test";
-        int id = 1;
-        var musica = new Musica(nomeDaMusica) { Id = id };
-        string resultadoEsperado = $"Id: {id} Nome: {nomeDaMusica}";
+        var musica = new Musica(nome) { Id = id };
+        string resultadoEsperado = $"Id: {id} Nome: {nome}";
         
         //Act
         string resultado = musica.ToString();
