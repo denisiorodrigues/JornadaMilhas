@@ -64,4 +64,20 @@ public class OfertaViagemConstrutor
         // assert
         Assert.Contains(mensagemErroRetorno, oferta.Erros.Sumario);
     }
+
+    [Fact]
+    public void RetornaTresErrosDeValidacaoQuandoRotaPeriodoEPRecoSaoInvalidos()
+    {
+        //arrange
+        int quantidadeErros = 3;
+        Rota rota = null;
+        Periodo periodo = new Periodo(new DateTime(2025, 06, 08), new DateTime(2025, 02, 02));
+        double preco = -100.00;
+        
+        //act
+        OfertaViagem oferta = new OfertaViagem(rota, periodo, preco);
+        
+        //assert
+        Assert.Equal(quantidadeErros, oferta.Erros.Count());
+    }
 }
