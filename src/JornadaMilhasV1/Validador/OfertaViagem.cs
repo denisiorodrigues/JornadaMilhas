@@ -28,7 +28,7 @@ public class OfertaViagem: Valida
             {
                 Preco *= (1 - DESCONTO_MAXIMO);
             }
-            else
+            else if (desconto > 0)
             {
                 Preco -= desconto;    
             }
