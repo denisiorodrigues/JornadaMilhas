@@ -71,5 +71,36 @@ public class MusicaTest
         //Assert
         Assert.NotNull(musica);
         Assert.Equal(resultado, toStringEsperado);
-    } 
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-100)]
+    public void RetornarAnoDeLancamentoMaiorQueZero(int anoLancamento)
+    {
+        //Arrange
+        Musica musica = new Musica("musica1");
+        
+        //Act
+        musica.AnoLancamento = anoLancamento;
+        
+        //Assert
+        Assert.Null(musica.AnoLancamento);
+    }
+    
+    [Theory]
+    [InlineData(null, "Artista desconhecido")]
+    [InlineData("", "Artista desconhecido")]
+    [InlineData("mario", "mario")]
+    public void RetornaArtistaDesconhecidoQuandoValorInseridoEhNulo(string? nomeArtista, string nomeEsperado)
+    {
+        //Arrange
+        Musica musica = new Musica("musica1");
+        
+        //Act
+        musica.Artista = nomeArtista;
+        
+        //Assert
+        Assert.Equal(nomeEsperado, musica.Artista);
+    }
 }
