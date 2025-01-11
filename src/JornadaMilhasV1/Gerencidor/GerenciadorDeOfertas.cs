@@ -66,7 +66,11 @@ public class GerenciadorDeOfertas
     }
 
     public OfertaViagem? RecuperaMaiorDesconto(Func<OfertaViagem, bool> filtro)
-        => ofertaViagem.FirstOrDefault(filtro);
+        => ofertaViagem
+            .Where(filtro)
+            .Where(o => o.Ativa)
+            .OrderBy(o => o.Preco)
+            .FirstOrDefault();
 
     public virtual void CarregarOfertas()
     {
