@@ -15,7 +15,7 @@ public class GerenciadorDeOfertas
         this.ofertaViagem = ofertaViagem;
     }
 
-    public void CadastrarOferta()
+    public virtual void CadastrarOferta()
     {
         Console.WriteLine("-- Cadastro de ofertas --");
         Console.WriteLine("Informe a cidade de origem: ");
@@ -65,15 +65,17 @@ public class GerenciadorDeOfertas
 
     }
 
+    public OfertaViagem? RecuperaMaiorDesconto(Func<OfertaViagem, bool> filtro)
+        => ofertaViagem.FirstOrDefault(filtro);
 
-    public void CarregarOfertas()
+    public virtual void CarregarOfertas()
     {
         AdicionarOfertaNaLista(new OfertaViagem(new Rota("São Paulo", "Curitiba"), new Periodo(new DateTime(2024, 1, 15), new DateTime(2024, 1, 20)), 500));
         AdicionarOfertaNaLista(new OfertaViagem(new Rota("Recife", "Rio de Janeiro"), new Periodo(new DateTime(2024, 2, 10), new DateTime(2024, 2, 15)), 700));
         AdicionarOfertaNaLista(new OfertaViagem(new Rota("Acre", "Brasília"), new Periodo(new DateTime(2024, 3, 5), new DateTime(2024, 3, 10)), 600));
     }
 
-    public void ExibirTodasAsOfertas()
+    public virtual void ExibirTodasAsOfertas()
     {
         Console.WriteLine("\nTodas as ofertas cadastradas: ");
         foreach (var oferta in ofertaViagem)

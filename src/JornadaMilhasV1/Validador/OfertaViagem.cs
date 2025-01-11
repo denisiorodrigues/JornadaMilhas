@@ -17,6 +17,7 @@ public class OfertaViagem: Valida
     public Rota Rota { get; set; } 
     public Periodo Periodo { get; set; }
     public double Preco { get; set; }
+    public bool Ativa { get; set; } = true;
 
     public double Desconto
     {
@@ -53,7 +54,12 @@ public class OfertaViagem: Valida
         if (!Periodo.EhValido)
         {
             Erros.RegistrarErro(Periodo.Erros.Sumario);
-        } 
+        }
+
+        if (!Rota.EhValido)
+        {
+            Erros.RegistrarErro(Rota.Erros.Sumario);
+        }
         
         if (Rota == null || Periodo == null)
         {

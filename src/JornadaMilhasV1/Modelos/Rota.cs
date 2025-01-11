@@ -18,16 +18,16 @@ public class Rota: Valida
     {
         Origem = origem;
         Destino = destino;
-
+        Validar();
     }
 
     protected override void Validar()
     {
-        if ((this.Origem is null) || this.Origem.Equals(string.Empty))
+        if (string.IsNullOrEmpty(this.Origem))
         {
             Erros.RegistrarErro("A rota não pode possuir uma origem nula ou vazia.");
         }
-        else if ((this.Destino is null) || this.Destino.Equals(string.Empty))
+        else if (string.IsNullOrEmpty(this.Destino))
         {
             Erros.RegistrarErro("A rota não pode possuir um destino nulo ou vazio.");
         }
