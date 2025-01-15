@@ -1,3 +1,4 @@
+using Bogus;
 using JornadaMilhasV1.Modelos;
 
 namespace JornadaMilhas.Test;
@@ -26,7 +27,7 @@ public class MusicaTest
     public void ValidaroSeOIndetificadorDaMusicaFoiInicializado(int id)
     {
         //Arrange
-        string nomeDaMusica = "JornadaMilhas.Test";
+        string nomeDaMusica = new Faker("pt_BR").Lorem.Word();;
 
         //Act
         var musica = new Musica(nomeDaMusica) { Id = id };
@@ -56,14 +57,14 @@ public class MusicaTest
         Assert.Equal(saidaEsperada, saidaAtual);
     }
     
-    [Theory]
-    [InlineData(1, "Música Teste", "Id: 1 Nome: Música Teste")]
-    [InlineData(2, "Outra Música", "Id: 2 Nome: Outra Música")]
-    [InlineData(3, "Mais uma Música", "Id: 3 Nome: Mais uma Música")]
-    public void RetornarToStringDoObjetoEValidandoORsultadoEsperado(int id, string nome, string toStringEsperado)
+    [Fact]
+    public void RetornarToStringDoObjetoEValidandoORsultadoEsperado()
     {
         //Arrange
+        int id = new Faker().Random.Int();
+        string nome = new Faker("pt_BR").Lorem.Word();
         var musica = new Musica(nome) { Id = id };
+        string toStringEsperado = $"Id: {id} Nome: {nome}";
         
         //Act
         string resultado = musica.ToString();
@@ -79,7 +80,8 @@ public class MusicaTest
     public void RetornarAnoDeLancamentoMaiorQueZero(int anoLancamento)
     {
         //Arrange
-        Musica musica = new Musica("musica1");
+        string nome = new Faker("pt_BR").Lorem.Word();
+        Musica musica = new Musica(nome);
         
         //Act
         musica.AnoLancamento = anoLancamento;
@@ -95,7 +97,8 @@ public class MusicaTest
     public void RetornaArtistaDesconhecidoQuandoValorInseridoEhNulo(string? nomeArtista, string nomeEsperado)
     {
         //Arrange
-        Musica musica = new Musica("musica1");
+        string nome = new Faker("pt_BR").Lorem.Word();
+        Musica musica = new Musica(nome);
         
         //Act
         musica.Artista = nomeArtista;
